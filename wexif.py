@@ -4,7 +4,14 @@ from PIL import Image
 from sys import argv
 
 def main():
-	url = argv[1]
+	if len(argv) <= 1 or len(argv) > 2:
+		raise ValueError('wexif.py requires one argument')
+	else:
+		url = argv[1]
+		
+	if not (url.startswith('http://') or url.startswith('https://')):
+		raise ValueError('URL must start with http(s)://')
+		
 	filename = url.split('/')[-1] # выбор названия файла из URL
 
 	if '?' in filename:
